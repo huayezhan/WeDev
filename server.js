@@ -1,28 +1,25 @@
-// Import
-const config = require('./config/config');
-const express = require('express');
-const mongoose = require('mongoose');
-const app = express();
+import config from './config/config.js' 
+import app from './server/express.js'
+import mongoose from 'mongoose' 
+mongoose.Promise = global.Promise
+mongoose.connect(config.mongoUri, { 
+    //useNewUrlParser: true,
+    //useCreateIndex: true, 
+    //useUnifiedTopology: true
+ } )
+.then(() => {
+  console.log("Connected to the database!");
+  })
 
-// Set up mongoose
-mongoose.Promise = global.Promise;
-
-// Connect to the database
-mongoose.connect(config.mongoUri).then(() => {
-    console.log("Connected to WeDev Survey database!");
-});
-    
 mongoose.connection.on('error', () => {
-    throw new Error(`unable to connect to database: ${config.mongoUri}`) 
-});
-
+throw new Error(`unable to connect to database: ${mongoUri}`) 
+})
 app.get("/", (req, res) => {
-    res.json({ message: "Welcome WeDev web site!" });
+res.json({ message: "Welcome to User application." });
 });
-
 app.listen(config.port, (err) => { 
-    if (err) {
-        console.log(err) 
-    }
-    console.info('Server is running on port %s.', config.port) 
-});
+if (err) {
+console.log(err) 
+}
+console.info('Server started on port %s.', config.port) 
+})

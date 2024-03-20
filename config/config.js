@@ -8,4 +8,4 @@ const config = {
    (process.env.MONGO_PORT || '27017') +
     '/wedevproject' 
     }
-    module.exports = config;
+   export default config;
