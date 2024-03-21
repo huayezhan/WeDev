@@ -22,6 +22,6 @@ router.param('userId', userCtrl.userByID)
 router.route('/surveyapi/users/:userId').get(userCtrl.read)
 router.route('/surveyapi/users/:userId').put(userCtrl.update)
 router.route('/surveyapi/users/:userId').delete(userCtrl.remove)
-  
+router.route('/surveyapi/filter').get(userCtrl.filter)
   
   export default router

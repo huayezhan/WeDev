@@ -1,5 +1,6 @@
 import User from '../models/user.model.js'
 import extend from 'lodash/extend.js'
+
 import errorHandler from './error.controller.js'
 const create = async (req, res) => { 
 const user = new User(req.body) 
@@ -72,4 +73,22 @@ error: errorHandler.getErrorMessage(err)
 })
 } 
 }
-export default { create, userByID, read, list, remove, update }
+
+
+const filter = async (req, res) => {
+const filt = req.query.name;
+try {	
+let user = await User.find({ "name": {$regex: filt} 
+})
+if(user){
+res.json(user);
+}
+}catch (err) {
+console.log('error ', err)
+return res.status('400').json({
+error: "No product match"
+})
+}
+}
+
+export default { create, userByID, read, list, remove, update, filter}
