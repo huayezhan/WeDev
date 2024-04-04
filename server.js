@@ -1,27 +1,39 @@
-import config from './config/config.js' 
-import app from './server/express.js'
-import mongoose from 'mongoose'
-mongoose.Promise = global.Promise
-mongoose.connect(config.mongoUri, { 
-    //useNewUrlParser: true,
-    //useCreateIndex: true, 
-    //useUnifiedTopology: true
- } )
-.then(() => {
-  console.log("Connected to WeDev Survey Database!");
+import mongoose from 'mongoose';
+import config from './config/config.js';
+import app from './server/express.js';
+
+mongoose.Promise = global.Promise;
+
+mongoose.connect(config.mongoUri)
+  .then(() => {
+    console.log("Connected to the database!");
   })
+  .catch((error) => {
+    console.error(`Unable to connect to database: ${config.mongoUri}`);
+    console.error(error);
+    process.exit(1);
+  });
 
-mongoose.connection.on('error', () => {
-throw new Error(`unable to connect to database: ${mongoUri}`) 
-})
-
-app.get("/", (req, res) => {
-  res.json({ message: "Welcome to WeDev Survey Website." });
+mongoose.connection.on('error', (error) => {
+  console.error(`MongoDB connection error: ${error}`);
+  process.exit(1);
 });
 
-app.listen(config.port, (err) => { 
+app.get("/", (req, res) => {
+  res.json({ message: "Welcome to Wedev application." });
+});
+
+const server = app.listen(config.port, (err) => { 
   if (err) {
-    console.log(err) 
+    console.error(err);
+    process.exit(1);
   }
-console.info('Server started on port %s.', config.port) 
+  console.info('Server started on port %s.', config.port);
+});
+
+process.on('unhandledRejection', (error) => {
+  console.error('Unhandled promise rejection:', error);
+  server.close(() => {
+    process.exit(1);
+  });
 });
