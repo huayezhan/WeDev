@@ -2,9 +2,9 @@ import mongoose from 'mongoose'
 
 const surveySchema = new mongoose.Schema({
     user_id: {
-        type: String,
-        required: true
-        },
+        type: mongoose.Schema.ObjectId,
+        ref: 'User'
+    },
     timestamp: {
         type: Date,
         default: Date.now
