@@ -7,6 +7,8 @@ import Signin from "./lib/Signin.jsx";
 import PrivateRoute from "./lib/PrivateRoute.jsx";
 import EditProfile from "./user/EditProfile.jsx";
 import Menu from "./core/Menu";
+import Survey from "./survey/survey.jsx";
+
 function MainRouter() {
   return (
     <div>
@@ -17,6 +19,7 @@ function MainRouter() {
         <Route path="/users" element={<Users />} />
         <Route path="/signup" element={<Signup />} />
         <Route path="/signin" element={<Signin />} />
+        <Route path="/survey" element={<Survey />} />
         <Route
           path="/user/edit/:userId"
           element={
