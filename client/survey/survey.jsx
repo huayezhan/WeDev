@@ -28,7 +28,7 @@ const SurveyWeDev = () => {
                     },
                     {
                         type: "checkbox",
-                        name: "description",
+                        name: "describe",
                         title: "Which of the following words would you use to describe our website? (Select all that apply)",
                         choices: ["Amazing", "Reliable", "Useful", "Fast", "Confusing", "Poor quality", "Unreliable", "Ineffective", "Boring"]
                     },
