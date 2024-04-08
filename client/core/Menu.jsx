@@ -27,11 +27,9 @@ export default function Menu(){
   const location = useLocation();
 
   return (
-    <AppBar position="static" style={{ background: '#626060' }}>
+    <AppBar position="static" style={{ background: '#000000' }}>
     <Toolbar style={{ justifyContent: 'space-between' }}>
-    <Typography variant="h6" style={{ fontSize: '24px', color: '#D5CEA3', fontStyle: 'bold'}}>
-    <span style={{ fontFamily: 'Times New Roman' }}>WeDev SURVEY site</span>
-    </Typography>
+    <img src="../assets/images/WeDev_Logo.png" alt="WeDev" style={{ height: '70px', width: '120px' }}/>
       <div>
         <Link to="/">
           <IconButton aria-label="Home" style={isActive(location, "/")}>
