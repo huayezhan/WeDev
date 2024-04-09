@@ -3,8 +3,20 @@ import { Survey } from "survey-react";
 import "survey-react/survey.css";
 import "./surveyStyle.css";
 import axios  from 'axios';
+import { useNavigate } from 'react-router-dom';
+import auth from '../lib/auth-helper';
 
 const SurveyWeDev = () => {
+    const navigate = useNavigate();
+    React.useEffect(() => {
+        if (!auth.isAuthenticated()) {
+          navigate('/signin', { replace: true });
+        }
+      }, [navigate]);
+    
+      if (!auth.isAuthenticated()) {
+        return null; // or you can render a loading spinner or message
+      }
     const surveyJSON = {
         title: "WeDev website Feedback Survey",
         elements: [ 

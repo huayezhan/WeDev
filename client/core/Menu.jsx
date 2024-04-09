@@ -39,6 +39,9 @@ export default function Menu(){
         <Link to="/users">
           <Button style={isActive(location, "/users")}>Users</Button>
         </Link>
+        <Link to="/survey">
+            <Button style={isActive(location, "/survey")}>Survey</Button>
+        </Link>
         {
           !auth.isAuthenticated() && (<span>
             <Link to="/signup">
